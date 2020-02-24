@@ -1,0 +1,58 @@
+#Managed to get an 88% but needs to be fully optimized to acheive 100%
+
+import sys
+import math
+
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+
+w, h, count_x, count_y = [int(i) for i in input().split()]
+
+xlist = []
+ylist = [] # lists to initially append the starting values
+
+sublist = []
+newlist = [] # sublists to hold values for x
+
+subylist = []
+newylist = [] # sublists to hold values for y
+
+numofsquares = 0
+
+for i in input().split():
+    x = int(i)
+    xlist.append(x) 
+    newlist.append(x)
+    
+xlist.append(w)
+newlist.append(w)         #append x values
+
+
+for i in range(len(xlist)):    
+    xlist[:] = [number - xlist[i] for number in xlist]
+    sublist += xlist[i + 1:]                               #gets the values by subtracting elements e.g. (x1 - x2),(x1 - x3)
+
+superxlist = sublist + newlist  #all the values into one list
+
+print("Debug messages...",superxlist, file=sys.stderr) 
+    
+for i in input().split():
+    y = int(i)
+    ylist.append(y)
+    newylist.append(y)
+    
+ylist.append(h)
+newylist.append(h)
+
+
+
+for i in range(len(ylist)):    
+    xlist[:] = [number - ylist[i] for number in ylist]
+    subylist += xlist[i + 1:]
+
+superylist = subylist + newylist
+
+
+
+print(len([numofsquares for x in superylist for y in superxlist if x == y])) #checks the lists to find perfect squares
+    
